@@ -4,6 +4,15 @@ import { Profile, Photos, Cocktails, Pokemon} from '../components/Pages.js'
 
 class MainBox extends React.Component {
 
+  state = {
+    menuDisplay : ""
+  }
+
+  onClickDisplay = (value) => {
+    this.setState({
+      menuDisplay: value
+    })
+  }
 
   render() {
 
@@ -13,11 +22,14 @@ class MainBox extends React.Component {
 
     */
 
-    const detailsToDisplay = <div>Hi, I'm a div!</div>
+    const detailsToDisplay = this.state.menuDisplay === "profile" ? <Profile /> : 
+      this.state.menuDisplay === "photo" ? <Photos /> :
+      this.state.menuDisplay=== "cocktail" ? <Cocktails /> :
+      this.state.menuDisplay === "pokemon" ? <Pokemon /> : null
 
     return (
       <div>
-        <MenuBar />
+        <MenuBar option={this.onClickDisplay} />
         {detailsToDisplay}
       </div>
     )
